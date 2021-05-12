@@ -1,2 +1,3 @@
 rootProject.name = "GigithubUser"
-include ':app'
+include(":app")
+include(":core")
