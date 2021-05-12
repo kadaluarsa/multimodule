@@ -1,8 +1,6 @@
 plugins {
     id("com.android.library")
-    id("dagger.hilt.android.plugin")
-    kotlin("android")
-    kotlin("kapt")
+    id("kotlin-android")
 }
 
 android {
@@ -10,13 +8,13 @@ android {
     buildToolsVersion("30.0.3")
 
     defaultConfig {
-        applicationId("co.id.kadaluarsa.gigithubuser")
         minSdkVersion(21)
         targetSdkVersion(30)
         versionCode = 1
-        versionName = "1.0.0"
+        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles = "consumer-rules.pro"
     }
 
     buildTypes {
@@ -36,14 +34,6 @@ android {
 
 dependencies {
     implementation(project(":core"))
-    implementation(project(":feature:github"))
-    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
-    implementation(
-        kotlin(
-            module = "stdlib-jdk7",
-            version = org.jetbrains.kotlin.config.KotlinCompilerVersion.VERSION
-        )
-    )
     implementation("androidx.core:core-ktx:1.3.1")
     implementation("androidx.appcompat:appcompat:1.2.0")
     implementation("com.google.android.material:material:1.3.0")
@@ -76,6 +66,4 @@ dependencies {
     kapt("androidx.hilt:hilt-compiler:1.0.0-beta01")
 
     implementation("com.jakewharton.timber:timber:4.7.0")
-
-
 }
