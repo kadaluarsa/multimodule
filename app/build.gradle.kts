@@ -1,8 +1,10 @@
 plugins {
-    id("com.android.library")
+    id("com.android.application")
     id("dagger.hilt.android.plugin")
     kotlin("android")
     kotlin("kapt")
+    id("kotlin-android")
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -32,11 +34,27 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures {
+        dataBinding = true
+    }
+    kapt {
+        correctErrorTypes = true
+    }
+    testOptions {
+        unitTests.apply {
+            isReturnDefaultValues = true
+        }
+    }
 }
 
 dependencies {
+
     implementation(project(":core"))
+    implementation(project(":mainui"))
+    implementation(project(":feature:navigation"))
     implementation(project(":feature:github"))
+    implementation(project(":feature:search"))
+
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation(
         kotlin(
@@ -44,7 +62,7 @@ dependencies {
             version = org.jetbrains.kotlin.config.KotlinCompilerVersion.VERSION
         )
     )
-    implementation("androidx.core:core-ktx:1.3.1")
+    implementation("androidx.core:core-ktx:1.3.2")
     implementation("androidx.appcompat:appcompat:1.2.0")
     implementation("com.google.android.material:material:1.3.0")
     implementation("androidx.constraintlayout:constraintlayout:2.0.4")
@@ -59,23 +77,18 @@ dependencies {
     androidTestImplementation("org.mockito:mockito-android:2.15.0")
 
     // LiveData & ViewModel
-    implementation("androidx.lifecycle:lifecycle-extensions:2.0.0")
-    // Room
-    implementation("androidx.room:room-runtime:2.0.0")
-    kapt("androidx.room:room-compiler:2.0.0")
-
-    // Retrofit and its adapters and converters
-    implementation("com.squareup.retrofit2:retrofit:2.4.0")
-    implementation("com.squareup.retrofit2:adapter-rxjava2:2.4.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.4.0")
-    implementation("com.squareup.okhttp3:logging-interceptor:2.4.0")
-    // Dagger 2
+    implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
+    // logging
+    implementation("com.jakewharton.timber:timber:4.7.1")
+    // DI
     implementation("com.google.dagger:hilt-android:2.31-alpha")
     kapt("com.google.dagger:hilt-android-compiler:2.31-alpha")
     implementation("androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03")
-    kapt("androidx.hilt:hilt-compiler:1.0.0-beta01")
-
-    implementation("com.jakewharton.timber:timber:4.7.0")
+    kapt("androidx.hilt:hilt-compiler:1.0.0")
+    //navigation
+    implementation("androidx.navigation:navigation-fragment-ktx:2.3.5")
+    implementation("androidx.navigation:navigation-ui-ktx:2.3.5")
+    implementation("androidx.navigation:navigation-dynamic-features-fragment:2.3.5")
 
 
 }
