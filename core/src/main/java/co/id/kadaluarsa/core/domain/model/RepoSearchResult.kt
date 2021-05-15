@@ -14,17 +14,17 @@
  * limitations under the License.
  */
 
-package com.android.example.github.vo
+package co.id.kadaluarsa.core.domain.model
 
-/**
- * Status of a resource that is provided to the UI.
- *
- *
- * These are usually created by the Repository classes where they return
- * `LiveData<Resource<T>>` to pass back the latest data to the UI with its fetch status.
- */
-enum class Status {
-    SUCCESS,
-    ERROR,
-    LOADING
-}
+import androidx.room.Entity
+import androidx.room.TypeConverters
+import co.id.kadaluarsa.core.data.db.GithubTypeConverters
+
+@Entity(primaryKeys = ["query"])
+@TypeConverters(GithubTypeConverters::class)
+data class RepoSearchResult(
+    val query: String,
+    val repoIds: List<Int>,
+    val totalCount: Int,
+    val next: Int?
+)

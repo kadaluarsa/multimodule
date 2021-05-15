@@ -19,11 +19,10 @@ package co.id.kadaluarsa.core.data.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import co.id.kadaluarsa.core.model.Contributor
-import co.id.kadaluarsa.core.model.Repo
-import co.id.kadaluarsa.core.model.RepoSearchResult
-import com.android.example.github.db.UserDao
-import com.android.example.github.vo.User
+import co.id.kadaluarsa.core.domain.model.Contributor
+import co.id.kadaluarsa.core.domain.model.Repo
+import co.id.kadaluarsa.core.domain.model.RepoSearchResult
+import co.id.kadaluarsa.core.domain.model.User
 
 /**
  * Main database description.

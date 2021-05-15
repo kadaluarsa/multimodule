@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="12dp">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/image_thumb"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/circleImageView"
+            app:srcCompat="@color/black" />
+
+        <TextView
+            android:id="@+id/text_realname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:textStyle="bold"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@id/image_thumb"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Dony Nuransyah" />
+
+        <TextView
+            android:id="@+id/text_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textSize="8sp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+            android:textColor="#858282"
+            app:layout_constraintBottom_toBottomOf="@id/text_realname"
+            app:layout_constraintStart_toEndOf="@id/text_realname"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Kadaluarsa" />
+
+        <TextView
+            android:id="@+id/text_bios"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@id/image_thumb"
+            app:layout_constraintTop_toBottomOf="@id/text_realname"
+            tools:text="Senior Moba Engingeng" />
+
+        <TextView
+            android:id="@+id/text_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:textStyle="normal"
+            android:textSize="8sp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/image_thumb"
+            app:layout_constraintTop_toBottomOf="@id/text_bios"
+            tools:text="Bandung, Indonesia" />
+
+        <TextView
+            android:id="@+id/text_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:textStyle="normal"
+            android:textSize="8sp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/text_location"
+            app:layout_constraintTop_toBottomOf="@id/text_bios"
+            tools:text="donynuransyah@gmail.com" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

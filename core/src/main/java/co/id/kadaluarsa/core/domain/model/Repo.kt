@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package co.id.kadaluarsa.core.model
+package co.id.kadaluarsa.core.domain.model
 
 import androidx.room.Embedded
 import androidx.room.Entity

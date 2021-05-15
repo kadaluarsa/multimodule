@@ -14,17 +14,22 @@
  * limitations under the License.
  */
 
-package co.id.kadaluarsa.core.model
+package co.id.kadaluarsa.core.utils
 
-import androidx.room.Entity
-import androidx.room.TypeConverters
-import co.id.kadaluarsa.core.data.db.GithubTypeConverters
+import androidx.lifecycle.LiveData
 
-@Entity(primaryKeys = ["query"])
-@TypeConverters(GithubTypeConverters::class)
-data class RepoSearchResult(
-    val query: String,
-    val repoIds: List<Int>,
-    val totalCount: Int,
-    val next: Int?
-)
+/**
+ * A LiveData class that has `null` value.
+ */
+class AbsentLiveData<T : Any?> private constructor(): LiveData<T>() {
+    init {
+        // use post instead of set since this can be created on any thread
+        postValue(null)
+    }
+
+    companion object {
+        fun <T> create(): LiveData<T> {
+            return AbsentLiveData()
+        }
+    }
+}

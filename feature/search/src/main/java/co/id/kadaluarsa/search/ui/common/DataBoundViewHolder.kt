@@ -14,22 +14,14 @@
  * limitations under the License.
  */
 
-package co.id.kadaluarsa.core.data.network
+package co.id.kadaluarsa.search.ui.common
 
-
-import co.id.kadaluarsa.core.domain.model.Repo
-import com.google.gson.annotations.SerializedName
+import androidx.databinding.ViewDataBinding
+import androidx.recyclerview.widget.RecyclerView
 
 /**
- * Simple object to hold repo search responses. This is different from the Entity in the database
- * because we are keeping a search result in 1 row and denormalizing list of results into a single
- * column.
- */
-data class RepoSearchResponse(
-    @SerializedName("total_count")
-    val total: Int = 0,
-    @SerializedName("items")
-    val items: List<Repo>
-) {
-    var nextPage: Int? = null
-}
+ * A generic ViewHolder that works with a [ViewDataBinding].
+ * @param <T> The type of the ViewDataBinding.
+</T> */
+class DataBoundViewHolder<out T : ViewDataBinding> constructor(val binding: T) :
+    RecyclerView.ViewHolder(binding.root)

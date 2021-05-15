@@ -26,7 +26,3 @@ fun NavController.deepLinkNavigateTo(
     )
 }
 
-sealed class DeepLinkDestination(val address: String) {
-    class Dashboard(msg: String) : DeepLinkDestination("example://dashboard/exampleArgs?userId=${msg}")
-    object Next : DeepLinkDestination("example://next")
-}

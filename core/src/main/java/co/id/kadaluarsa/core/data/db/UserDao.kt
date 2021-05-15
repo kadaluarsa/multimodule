@@ -14,23 +14,35 @@
  * limitations under the License.
  */
 
-package com.android.example.github.db
+package co.id.kadaluarsa.core.data.db
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.android.example.github.vo.User
+import co.id.kadaluarsa.core.domain.model.User
 
 /**
  * Interface for database access for User related operations.
  */
 @Dao
 interface UserDao {
+    //save single user
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(user: User)
+    fun insertUser(user: User)
 
-    @Query("SELECT * FROM user WHERE login = :login")
-    fun findByLogin(login: String): LiveData<User>
+    //save list of user
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertUsers(users: List<User>)
+
+    //get list of user
+    @Query("SELECT * FROM User")
+    fun getUsers() : LiveData<List<User>>
+
+    @Query("SELECT * FROM User WHERE login = :username")
+    fun findByUsername(username: String): LiveData<User>
+
+    @Query("select *from User where name in(:ids)")
+    fun getAll(ids: Array<String?>) : List<User>
 }

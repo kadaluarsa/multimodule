@@ -8,7 +8,9 @@ import co.id.kadaluarsa.navigation.NavigationFlow
 import co.id.kadaluarsa.navigation.Navigator
 import co.id.kadaluarsa.navigation.ToFlowNavigatable
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity(), ToFlowNavigatable {
     private val navigator: Navigator = Navigator()
     override fun onCreate(savedInstanceState: Bundle?) {

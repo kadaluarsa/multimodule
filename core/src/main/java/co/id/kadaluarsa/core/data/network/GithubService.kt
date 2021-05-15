@@ -17,11 +17,9 @@
 package co.id.kadaluarsa.core.data.network
 
 import androidx.lifecycle.LiveData
-import co.id.kadaluarsa.core.model.Contributor
-import co.id.kadaluarsa.core.model.Repo
-import co.id.kadaluarsa.core.model.Users
-import com.android.example.github.vo.User
+import co.id.kadaluarsa.core.domain.model.*
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -29,6 +27,7 @@ import retrofit2.http.Query
 /**
  * REST API access points
  */
+
 interface GithubService {
     @GET("users/{login}")
     fun getUser(@Path("login") login: String): LiveData<ApiResponse<User>>
@@ -51,7 +50,6 @@ interface GithubService {
     @GET("search/users")
     fun searchUser(
         @Query("q") query: String,
-        @Query("page") since: Int,
         @Query("per_page") perPage: Int
     ): LiveData<ApiResponse<Users>>
 

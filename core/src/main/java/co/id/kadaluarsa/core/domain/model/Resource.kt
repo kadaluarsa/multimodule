@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.android.example.github.vo
+package co.id.kadaluarsa.core.domain.model
 
-import com.android.example.github.vo.Status.ERROR
-import com.android.example.github.vo.Status.LOADING
-import com.android.example.github.vo.Status.SUCCESS
+import co.id.kadaluarsa.core.domain.model.Status.ERROR
+import co.id.kadaluarsa.core.domain.model.Status.LOADING
+import co.id.kadaluarsa.core.domain.model.Status.SUCCESS
 
 /**
  * A generic class that holds a value with its loading status.

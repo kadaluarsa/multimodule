@@ -23,9 +23,9 @@ import androidx.lifecycle.map
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import co.id.kadaluarsa.core.model.Contributor
-import co.id.kadaluarsa.core.model.Repo
-import co.id.kadaluarsa.core.model.RepoSearchResult
+import co.id.kadaluarsa.core.domain.model.Contributor
+import co.id.kadaluarsa.core.domain.model.Repo
+import co.id.kadaluarsa.core.domain.model.RepoSearchResult
 import co.id.kadaluarsa.testing.OpenForTesting
 
 /**
