@@ -19,6 +19,8 @@ class StartFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (requireActivity() as ToFlowNavigatable).navigateToFlow(NavigationFlow.SearchFlow)
+        view.post {
+            (requireActivity() as ToFlowNavigatable).navigateToFlow(NavigationFlow.SearchFlow)
+        }
     }
 }

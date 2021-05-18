@@ -8,7 +8,7 @@ import co.id.kadaluarsa.core.AppExecutors
 import co.id.kadaluarsa.core.domain.model.User
 import co.id.kadaluarsa.search.R
 import co.id.kadaluarsa.search.databinding.UserItemBinding
-import co.id.kadaluarsa.search.ui.common.DataBoundListAdapter
+import co.id.kadaluarsa.mainui.common.DataBoundListAdapter
 import com.bumptech.glide.Glide
 
 class UserListAdapter(

@@ -1,5 +1,8 @@
+import org.jetbrains.kotlin.codegen.createMethodNodeForAlwaysEnabledAssert
+
 plugins {
     id("com.android.library")
+    id("dagger.hilt.android.plugin")
     id("kotlin-android")
     kotlin("android")
     kotlin("kapt")
@@ -47,9 +50,9 @@ android {
 }
 
 dependencies {
-    implementation(project(":mainui"))
-    implementation(project(":core"))
-    implementation(project(":feature:navigation"))
+    api(project(":mainui"))
+    api(project(":core"))
+    api(project(":feature:navigation"))
 
     implementation("androidx.core:core-ktx:1.3.2")
     implementation("androidx.appcompat:appcompat:1.2.0")
@@ -67,24 +70,18 @@ dependencies {
 
     // LiveData & ViewModel
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
-    // retrofit
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:adapter-rxjava3:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     //glide
     implementation("com.github.bumptech.glide:glide:4.11.0")
     kapt("com.github.bumptech.glide:compiler:4.11.0")
-    // okhttp
-    implementation("com.squareup.okhttp3:logging-interceptor:4.9.0")
-
     // logging
     implementation("com.jakewharton.timber:timber:4.7.1")
 
     // DI
-    implementation("com.google.dagger:hilt-android:2.31-alpha")
-    kapt("com.google.dagger:hilt-android-compiler:2.31-alpha")
+    implementation("com.google.dagger:hilt-android:2.35.1")
+    kapt("com.google.dagger:hilt-android-compiler:2.35.1")
     implementation("androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03")
     kapt("androidx.hilt:hilt-compiler:1.0.0")
+    //lifecycle
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.3.1")
     implementation("androidx.lifecycle:lifecycle-common-java8:2.3.1")
     implementation("androidx.lifecycle:lifecycle-compiler:2.3.1")

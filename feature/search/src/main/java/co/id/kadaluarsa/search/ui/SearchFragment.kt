@@ -1,43 +1,61 @@
 package co.id.kadaluarsa.search.ui
 
+import android.os.Bundle
+import android.util.Log
+import android.view.KeyEvent
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import co.id.kadaluarsa.core.AppExecutors
-import co.id.kadaluarsa.core.di.Injectable
 import co.id.kadaluarsa.navigation.DeepLinkDestination
 import co.id.kadaluarsa.navigation.deepLinkNavigateTo
 import co.id.kadaluarsa.search.R
-import co.id.kadaluarsa.search.ui.base.BaseFragment
 import co.id.kadaluarsa.search.databinding.FragmentSearchBinding
 import co.id.kadaluarsa.search.ui.adapter.UserListAdapter
-import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-class SearchFragment : BaseFragment<FragmentSearchBinding>(), Injectable {
+@AndroidEntryPoint
+class SearchFragment : Fragment() {
 
     lateinit var adapter: UserListAdapter
     private val searchViewModel: SearchViewModel by viewModels()
+
     @Inject
     lateinit var appExecutors: AppExecutors
 
-    override fun layoutRes(): Int = R.layout.fragment_search
+    lateinit var binding: FragmentSearchBinding
 
-    override fun initView() {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.lifecycleOwner = viewLifecycleOwner
+        queryListener()
         initRecyclerView()
         val rvAdapter = UserListAdapter(
             appExecutors = appExecutors
-        ){ user ->
-            findNavController().deepLinkNavigateTo(DeepLinkDestination.Dashboard("From next fragment deeplink"))
-
+        ) { user ->
+            findNavController().deepLinkNavigateTo(DeepLinkDestination.UserDetail(username = user.login))
         }
+        binding.rvSearchResult.adapter = rvAdapter
+        adapter = rvAdapter
     }
 
     private fun initRecyclerView() {
-
         binding.rvSearchResult.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 val layoutManager = recyclerView.layoutManager as LinearLayoutManager
@@ -47,21 +65,19 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), Injectable {
                 }
             }
         })
-//        binding.searchResult = searchViewModel.results
-        searchViewModel.listuser.observe(viewLifecycleOwner, Observer { result ->
+        searchViewModel.listuser.observe(viewLifecycleOwner, { result ->
             adapter.submitList(result?.data)
         })
+    }
 
-//        searchViewModel.loadMoreStatus.observe(viewLifecycleOwner, Observer { loadingMore ->
-//            if (loadingMore == null) {
-//                binding.loadingMore = false
-//            } else {
-//                binding.loadingMore = loadingMore.isRunning
-//                val error = loadingMore.errorMessageIfNotHandled
-//                if (error != null) {
-//                    Snackbar.make(binding.loadMoreBar, error, Snackbar.LENGTH_LONG).show()
-//                }
-//            }
-//        })
+    private fun queryListener() {
+        binding.searchBox.setOnEditorActionListener { view: View, actionId: Int, _: KeyEvent? ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                searchViewModel.setUsername(binding.searchBox.text.toString())
+                true
+            } else {
+                false
+            }
+        }
     }
 }

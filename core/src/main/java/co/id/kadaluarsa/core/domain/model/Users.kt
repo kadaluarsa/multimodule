@@ -7,7 +7,9 @@ data class Users(
     @SerializedName("total_count")
     val totalCount: Int,
     val items: List<User>
-)
+){
+    var nextPage: Int? = null
+}
 
 @Entity(primaryKeys = ["login"])
 data class User(
@@ -23,14 +25,14 @@ data class User(
     val reposUrl: String?,
     @field:SerializedName("blog")
     val blog: String?,
-    val bio: String,
-    val email: String,
-    val followers: Int,
-    val following: Int,
-    val html_url: String,
-    val id: Int,
-    val location: String,
-    val public_gists: Int,
-    val public_repos: Int,
-    val twitter_username: String
+    val bio: String?,
+    val email: String?,
+    val followers: Int?,
+    val following: Int?,
+    val html_url: String?,
+    val id: Int?,
+    val location: String?,
+    val public_gists: Int?,
+    val public_repos: Int?,
+    val twitter_username: String?
 )

@@ -1,5 +1,6 @@
 plugins {
     id("com.android.library")
+    id("dagger.hilt.android.plugin")
     id("kotlin-android")
     kotlin("android")
     kotlin("kapt")
@@ -46,9 +47,9 @@ android {
 }
 
 dependencies {
-    implementation(project(":mainui"))
-    implementation(project(":core"))
-    implementation(project(":feature:navigation"))
+    api(project(":mainui"))
+    api(project(":core"))
+    api(project(":feature:navigation"))
 
     implementation("androidx.core:core-ktx:1.3.2")
     implementation("androidx.appcompat:appcompat:1.2.0")
@@ -78,8 +79,9 @@ dependencies {
     implementation("com.jakewharton.timber:timber:4.7.1")
 
     // DI
-    implementation("com.google.dagger:hilt-android:2.31-alpha")
-    kapt("com.google.dagger:hilt-android-compiler:2.31-alpha")
+    implementation("com.google.dagger:hilt-android:2.35.1")
+    kapt("androidx.room:room-compiler:2.3.0")
+    kapt("com.google.dagger:hilt-android-compiler:2.35.1")
     implementation("androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03")
     kapt("androidx.hilt:hilt-compiler:1.0.0")
     //navigation

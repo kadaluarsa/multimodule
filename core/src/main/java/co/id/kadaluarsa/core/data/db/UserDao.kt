@@ -27,22 +27,22 @@ import co.id.kadaluarsa.core.domain.model.User
  * Interface for database access for User related operations.
  */
 @Dao
-interface UserDao {
+abstract class UserDao {
     //save single user
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertUser(user: User)
+    abstract fun insertUser(user: User)
 
     //save list of user
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertUsers(users: List<User>)
+    abstract fun insertUsers(users: List<User>)
 
     //get list of user
     @Query("SELECT * FROM User")
-    fun getUsers() : LiveData<List<User>>
+    abstract fun getUsers() : LiveData<List<User>>
 
     @Query("SELECT * FROM User WHERE login = :username")
-    fun findByUsername(username: String): LiveData<User>
+    abstract fun findByUsername(username: String): LiveData<User>
 
     @Query("select *from User where name in(:ids)")
-    fun getAll(ids: Array<String?>) : List<User>
+    abstract fun getAll(ids: Array<String?>) : List<User>
 }

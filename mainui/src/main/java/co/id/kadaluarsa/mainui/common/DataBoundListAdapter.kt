@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package co.id.kadaluarsa.search.ui.common
+package co.id.kadaluarsa.mainui.common
 
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.AsyncDifferConfig

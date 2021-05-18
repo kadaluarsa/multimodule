@@ -38,7 +38,6 @@ android {
     }
     buildFeatures {
         dataBinding = true
-        viewBinding = true
     }
     kapt {
         correctErrorTypes = true
@@ -52,11 +51,11 @@ android {
 
 dependencies {
 
-    implementation(project(":core"))
-    implementation(project(":mainui"))
-    implementation(project(":feature:navigation"))
-    implementation(project(":feature:github"))
-    implementation(project(":feature:search"))
+    api(project(":core"))
+    api(project(":mainui"))
+    api(project(":feature:navigation"))
+    api(project(":feature:github"))
+    api(project(":feature:search"))
 
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation(
@@ -78,14 +77,18 @@ dependencies {
     testImplementation("org.mockito:mockito-core:2.23.4")
     testImplementation("org.mockito:mockito-inline:2.23.4")
     androidTestImplementation("org.mockito:mockito-android:2.15.0")
-
+    //stetho
+    implementation("com.facebook.stetho:stetho:1.6.0")
+    implementation("com.facebook.stetho:stetho-okhttp3:1.6.0")
     // LiveData & ViewModel
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
     // logging
     implementation("com.jakewharton.timber:timber:4.7.1")
+    //room
+    kapt("androidx.room:room-compiler:2.3.0")
     // DI
-    implementation("com.google.dagger:hilt-android:2.31-alpha")
-    kapt("com.google.dagger:hilt-android-compiler:2.31-alpha")
+    implementation("com.google.dagger:hilt-android:2.35.1")
+    kapt("com.google.dagger:hilt-android-compiler:2.35.1")
     implementation("androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03")
     kapt("androidx.hilt:hilt-compiler:1.0.0")
     //navigation

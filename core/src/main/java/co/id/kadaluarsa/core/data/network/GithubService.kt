@@ -50,6 +50,7 @@ interface GithubService {
     @GET("search/users")
     fun searchUser(
         @Query("q") query: String,
+        @Query("page") page: Int,
         @Query("per_page") perPage: Int
     ): LiveData<ApiResponse<Users>>
 

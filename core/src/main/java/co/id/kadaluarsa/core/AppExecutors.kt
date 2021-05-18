@@ -18,6 +18,10 @@ package co.id.kadaluarsa.core
 
 import android.os.Handler
 import android.os.Looper
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 
 import java.util.concurrent.Executor
 import java.util.concurrent.Executors
@@ -31,6 +35,7 @@ import javax.inject.Singleton
  * Grouping tasks like this avoids the effects of task starvation (e.g. disk reads don't wait behind
  * webservice requests).
  */
+
 @Singleton
 open class AppExecutors(
     private val diskIO: Executor,
@@ -38,8 +43,7 @@ open class AppExecutors(
     private val mainThread: Executor
 ) {
 
-    @Inject
-    constructor() : this(
+    @Inject constructor() : this(
         Executors.newSingleThreadExecutor(),
         Executors.newFixedThreadPool(3),
         MainThreadExecutor()

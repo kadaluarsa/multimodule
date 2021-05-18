@@ -14,6 +14,6 @@
 
         <deepLink
             android:id="@+id/deepLink"
-            app:uri="example://user/detail?userId={id}" />
+            app:uri="example://userdetail/args?username={id}" />
     </fragment>
 </navigation>

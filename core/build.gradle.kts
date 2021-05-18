@@ -33,9 +33,6 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    buildFeatures {
-        dataBinding = true
-    }
     kapt {
         correctErrorTypes = true
     }
@@ -80,17 +77,19 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:adapter-rxjava3:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-
+    //stetho
+    implementation("com.facebook.stetho:stetho:1.6.0")
+    implementation("com.facebook.stetho:stetho-okhttp3:1.6.0")
     // okhttp
-    implementation("com.squareup.okhttp3:logging-interceptor:4.9.0")
+    api("com.squareup.okhttp3:logging-interceptor:4.9.0")
 
     // logging
     implementation("com.jakewharton.timber:timber:4.7.1")
 
     // DI
-    implementation("com.google.dagger:hilt-android:2.31-alpha")
-    annotationProcessor("androidx.room:room-compiler:2.3.0")
-    kapt("com.google.dagger:hilt-android-compiler:2.31-alpha")
+    implementation("com.google.dagger:hilt-android:2.35.1")
+    kapt("androidx.room:room-compiler:2.3.0")
+    kapt("com.google.dagger:hilt-android-compiler:2.35.1")
     implementation("androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03")
     kapt("androidx.hilt:hilt-compiler:1.0.0")
     //navigation
