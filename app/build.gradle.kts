@@ -22,19 +22,37 @@ android {
     }
 
     buildTypes {
-        getByName("release") {
-            isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
+        buildTypes.map {
+            when (it.name) {
+                "release" -> {
+                    it.debuggable(false)
+                    it.isMinifyEnabled = true
+                    it.isShrinkResources = true
+                    it.proguardFiles(
+                        getDefaultProguardFile("proguard-android.txt"),
+                        "proguard-rules.pro"
+                    )
+                }
+                else -> {
+                    it.isMinifyEnabled = false
+                    it.debuggable(true)
+                    splits {
+                        this.abi.isEnable = false
+                        this.density.isEnable = false
+                        aaptOptions.cruncherEnabled = false
+                    }
+                }
+            }
         }
     }
     compileOptions {
         sourceCompatibility(JavaVersion.VERSION_1_8)
         targetCompatibility(JavaVersion.VERSION_1_8)
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
     }
-    kotlinOptions {
-        jvmTarget = "1.8"
+    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+        kotlinOptions {
+            jvmTarget = JavaVersion.VERSION_1_8.toString()
+        }
     }
     buildFeatures {
         dataBinding = true
@@ -64,28 +82,14 @@ dependencies {
             version = org.jetbrains.kotlin.config.KotlinCompilerVersion.VERSION
         )
     )
-    implementation("androidx.core:core-ktx:1.3.2")
-    implementation("androidx.appcompat:appcompat:1.2.0")
     implementation("com.google.android.material:material:1.3.0")
     implementation("androidx.constraintlayout:constraintlayout:2.0.4")
     androidTestImplementation("androidx.test.ext:junit:1.1.2")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("androidx.recyclerview:recyclerview:1.2.0")
-    // test
-    testImplementation("junit:junit:4.12")
-    testImplementation("org.mockito:mockito-core:2.23.4")
-    testImplementation("org.mockito:mockito-inline:2.23.4")
-    androidTestImplementation("org.mockito:mockito-android:2.15.0")
-    //stetho
-    implementation("com.facebook.stetho:stetho:1.6.0")
-    implementation("com.facebook.stetho:stetho-okhttp3:1.6.0")
-    // LiveData & ViewModel
-    implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
     // logging
     implementation("com.jakewharton.timber:timber:4.7.1")
-    //room
-    kapt("androidx.room:room-compiler:2.3.0")
     // DI
     implementation("com.google.dagger:hilt-android:2.35.1")
     kapt("com.google.dagger:hilt-android-compiler:2.35.1")
